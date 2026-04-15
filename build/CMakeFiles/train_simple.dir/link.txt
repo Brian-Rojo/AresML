@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/train_simple.dir/link.d CMakeFiles/train_simple.dir/examples/train_simple.cpp.o -o train_simple

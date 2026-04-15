@@ -1,0 +1,26 @@
+## Estado Actual del Proyecto AresML - Autograd
+
+### Lo que funciona:
+- nn::Linear con loss::MSELoss - gradientes fluyen correctamente
+- Sistema backward() propaga gradientes a traves del grafo computacional
+- View operations con metadata de strides en Tensor
+
+### Lo que NO funciona:
+- GPT training - los gradientes de los weights son 0
+- El grafo computacional no incluye los weights de las capas
+
+### Problema fundamental:
+Las capas en C++ pasan tensores por valor (copias). Cuando el grafo se construye:
+1. Cada capa (TokenEmbedding, PositionalEncoding, Linear, etc.) retorna un NUEVO tensor
+2. Este tensor tiene sus propios .inputs que incluyen los weights
+3. En el backward, el grafo se recorre pero los weights nunca aparecen en backward_order
+
+El grafo actual solo tiene: loss -> logits -> logits_flat -> input
+Faltan: token_embedding.weight, pos_encoding.weight, lm_head->weight, etc.
+
+### Solucion propuesta:
+Para que funcione, seria necesario refactorizar el sistema para que:
+1. Las capas retornen referencias/punteros en lugar de copias
+2. O que el grafo se construya de otra manera (ej: registrado en un registro global)
+
+### Lineas de codigo totales del proyecto: 11,401

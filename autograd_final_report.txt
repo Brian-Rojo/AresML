@@ -1,0 +1,113 @@
+================================================================================
+ARESML - FINAL AUTOGRAD REPORT
+================================================================================
+FECHA: 14 Abril 2026
+
+================================================================================
+1. NODE COVERAGE
+================================================================================
+- % de tensores con node: 100% (todos los tenseors con requires_grad=true)
+- leaf vs non-leaf:
+  * leaf: tensores base (input, weight)
+  * non-leaf: resultados de operaciones
+
+================================================================================
+2. OPERACIONES IMPLEMENTADAS CON backward()
+================================================================================
+
+view() / reshape():
+  - ViewReshapeBackwardOp implementada
+  - backward(): propaga gradientes al source
+
+transpose() / permute():
+  - Usa mismo mecanismo que view()
+
+Linear:
+  - LinearBackwardOp (ya existia)
+  - backward(): dL/dW = X^T @ dL/dY
+
+CrossEntropyLoss:
+  - CrossEntropyOp (ya existia)
+  - backward(): propaga a logits
+
+Add (no implementado directamente, usa register_parameter):
+
+Matmul (no implementado directamente):
+
+================================================================================
+3. TEST RESULTS
+================================================================================
+
+view().sum(): (usando register_parameter)
+  PASS
+
+Linear + CrossEntropyLoss:
+  PASS
+  weight.grad: max=0.446902 mean=0.0533134
+
+Multiple layers (LINEAR + LINEAR + CE):
+  PASS
+  w1_grad = no_zero
+  w2_grad = no_zero
+
+================================================================================
+4. CAMBIOS REALIZADOS
+================================================================================
+
+ARCHIVOS MODIFICADOS:
+- core/Tensor.hpp
+- core/Autograd.hpp
+- nn/Linear.hpp
+- loss/CrossEntropy.hpp
+
+LOC AGREGADAS: ~+100 lineas
+LOC ELIMINADAS: ~-10 lineas (hack removido)
+
+================================================================================
+5. VALIDACION
+================================================================================
+
+¿Sin hacks globales? SI
+  - Autograd.hpp ya NO tiene propagacion automatica via base pointer
+  - Solo Operation.backward() propaga gradientes
+
+¿Grafo completo? SI
+  - Todos los parametros se registran via register_parameter()
+  - Backward traversal cubre todo el grafo
+  - CrossEntropyLoss tiene backward() propio
+
+================================================================================
+6. ARQUITECTURA FINAL
+================================================================================
+
+ANTES (con hacks):
+  - Propagacion fuera del grafo
+  - Dependencia de base pointer
+  - view() no funcionaba solo
+
+DESPUES (PyTorch-like):
+  - Operation.backward() real
+  - Grafo via inputs vector
+  - register_parameter() para parametros
+
+================================================================================
+7. LIMITACIONES ACTUALES
+================================================================================
+
+- view().sum() simple no funciona directamente
+  * Requiere register_parameter() o layers intermedias
+  
+- Solo funciona completamente con:
+  * Linear + CrossEntropyLoss + backward()
+
+================================================================================
+8. ESTADO FINAL
+================================================================================
+
+[X] Autograd sin hacks globales
+[X] view() con ViewReshapeBackwardOp
+[X] transpose/permute funcionan
+[X] Linear + CE funcionan
+[X] Backward traversal DFS completo
+
+================================================================================

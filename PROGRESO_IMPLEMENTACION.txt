@@ -1,0 +1,353 @@
+================================================================================
+PROGRESO DE IMPLEMENTACIÓN - AresML
+================================================================================
+Fecha: 2026-04-14
+Objetivo: Transformar de "experimental" a "PyTorch-lite seguro y escalable"
+
+================================================================================
+PRIORIDAD 1 — SEGURIDAD DEL SISTEMA (CRÍTICO)
+================================================================================
+
+PROBLEMA: Memory & Ownership con raw pointers y const_cast
+
+1.1 Raw Pointers en Operation
+   - Todas las Operation tienen Tensor* raw
+   - Riesgo: use-after-free si el tensor se mueve/destruye
+   - Archivo: ops/Ops.hpp, nn/Linear.hpp, nn/Attention.hpp
+
+1.2 const_cast<Tensor*> everywhere
+   - En todas las operaciones: const_cast<Tensor*>(&x)
+   - Violates const correctness → undefined behavior
+   - Ubicación: ~30+ occurrences en el codebase
+
+DISEÑO RECOMENDADO:
+
+Opción A: Tensor Handle System (tipo PyTorch)
+```cpp
+// Instead of raw pointers
+struct TensorHandle {
+    std::shared_ptr<Tensor> tensor;
+    // + metadata: gradient needed, device, etc.
+};
+
+struct Operation {
+    virtual void backward(TensorHandle grad_output) = 0;
+    virtual std::vector<TensorHandle> get_inputs() = 0;
+};
+```
+
+Opción B: Arena Allocator
+```cpp
+class GraphArena {
+    // Allocate all tensors in single arena
+    // Automatic lifetime management
+    // No raw pointers outside arena
+};
+```
+
+RIESGO SI NO SE IMPLEMENTA:
+- Memory corruption en grafos grandes
+- Undefined behavior no determinista
+- Imposible debuggear en production
+
+================================================================================
+PRIORIDAD 2 — ATTENTION BACKWARD COMPLETO (BLOCKER IA)
+================================================================================
+
+PROBLEMA: Attention backward es incompleto
+
+ Estado actual (nn/Attention.hpp:26-45):
+```cpp
+void backward(Tensor& grad) override {
+    // Only propagates to projection weights
+    // Does NOT compute dQ, dK, dV from attention scores
+    // Missing: softmax backward, matmul backward
+}
+```
+
+Falta crítica:
+1. No guarda Q, K, V intermediates
+2. No guarda attn_weights (softmax output)
+3. No guarda attn_scores (pre-softmax)
+4. No computa d_scores desde d_output
+5. No computa dQ, dK, dV correctamente
+
+DISEÑO RECOMENDADO:
+
+```cpp
+struct AttentionBackwardOp : Operation {
+    // Store intermediates FORWARD
+    std::shared_ptr<Tensor> q;  // shape: B, H, S, D
+    std::shared_ptr<Tensor> k;
+    std::shared_ptr<Tensor> v;
+    std::shared_ptr<Tensor> attn_weights;  // softmax(QK^T/sqrt(D))
+    std::shared_ptr<Tensor> attn_scores;   // pre-softmax
+    
+    // Dimensions
+    size_t batch, seq_len, num_heads, head_dim;
+    
+    void backward(Tensor& grad) override {
+        // 1. d_attn_output = grad from output projection
+        // 2. d_attn_weights = d_attn_output @ V^T
+        // 3. d_scores = softmax_backward(d_attn_weights, attn_weights)
+        // 4. dQ = d_scores @ K / sqrt(D)
+        // 5. dK = d_scores^T @ Q / sqrt(D)
+        // 6. dV = attn_weights^T @ d_attn_output
+        // 7. Propagate dQ, dK, dV through projections
+    }
+};
+```
+
+RIESGO SI NO SE IMPLEMENTA:
+- NO se puede entrenar Transformers correctamente
+- Modelos de language no funcionan
+- Bloquea toda IA moderna
+
+================================================================================
+PRIORIDAD 3 — PERFORMANCE ENGINE
+================================================================================
+
+PROBLEMA: Matmul es O(n³) naive sin BLAS
+
+ Estado actual (backend_cpu/Matmul.hpp):
+```cpp
+for (size_t i = 0; i < M; ++i) {
+    for (size_t j = 0; j < N; ++j) {
+        float sum = 0.0f;
+        for (size_t k = 0; k < K; ++k) {
+            sum += a[i * K + k] * b[k * N + j];
+        }
+        c[i * N + j] = sum;
+    }
+}
+```
+
+ Benchmarks actuales (del OPTIMIZATION_REPORT):
+- matmul: 99.2% del tiempo de training
+- Sin BLAS: ~15ms por forward pass (batch=32, hidden=64)
+
+DISEÑO RECOMENDADO:
+
+```cpp
+// backend_cpu/Matmul.hpp - BLAS dispatch
+#ifdef USE_OPENBLAS
+    #include <cblas.h>
+    void matmul(const Tensor& A, const Tensor& B, Tensor& C) {
+        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans,
+                    M, N, K, 1.0f, A.data.get(), K,
+                    B.data.get(), N, 0.0f, C.data.get(), N);
+    }
+#else
+    // Fallback naive
+#endif
+```
+
+CMake integration:
+```cmake
+find_package(BLAS)
+if(BLAS_FOUND)
+    target_link_libraries(aresml ${BLAS_LIBRARIES})
+    target_compile_definitions(aresml PUBLIC USE_BLAS)
+endif()
+```
+
+EXPECTED SPEEDUP:
+- OpenBLAS: 10-50x faster
+- MKL: 20-100x faster
+- Con CPU moderno: ~10x speedup esperado
+
+RIESGO SI NO SE IMPLEMENTA:
+- Training de 100M parámetros: ~10 minutos por forward
+- Imposible escalar a modelos grandes
+
+================================================================================
+PRIORIDAD 4 — GRAPH ENGINE MODERNO
+================================================================================
+
+PROBLEMA: Singleton global para AutogradEngine
+
+ Estado actual (core/Autograd.hpp):
+```cpp
+class AutogradEngine {
+    static AutogradEngine& global() {
+        static AutogradEngine engine;
+        return engine;
+    }
+};
+```
+
+Problemas:
+- Estado compartido implícito
+- No soporta múltiples modelos
+- No soporta paralelismo real
+- Testing difícil (estado global)
+
+DISEÑO RECOMENDADO:
+
+```cpp
+class ExecutionContext {
+    // Explicit context instead of global
+    std::unordered_set<Tensor*> leaf_tensors;
+    std::vector<Tensor*> backward_order;
+    bool debug_mode;
+    
+public:
+    static thread_local ExecutionContext* current;
+    
+    static ExecutionContext& create() {
+        return *new ExecutionContext();
+    }
+    
+    static ExecutionContext& current() {
+        if (!current) current = &create();
+        return *current;
+    }
+};
+
+// API would be:
+inline void backward(Tensor& t) {
+    ExecutionContext::current().backward(&t);
+}
+```
+
+BENEFICIOS:
+- Múltiples modelos simultáneos
+- Testing干净 (no global state)
+- Preparado para multi-threading
+
+RIESGO SI NO SE IMPLEMENTA:
+- No se puede tener múltiples graphs
+- Imposible paralelizar training
+
+================================================================================
+PRIORIDAD 5 — COMPLETAR TENSOR SYSTEM
+================================================================================
+
+PROBLEMAS:
+- No hay broadcasting formal (PyTorch-style)
+- view() hace deep copy (debería ser zero-copy)
+- Strides no están definidos
+
+DISEÑO RECOMENDADO - Broadcasting:
+```cpp
+struct Tensor {
+    // ... existing fields ...
+    std::vector<size_t> strides;  // NEW
+    
+    // Broadcast to shape (like PyTorch)
+    Tensor broadcast_to(const Shape& target) const;
+    
+    // View without copy (like PyTorch .view())
+    Tensor view(const Shape& new_shape) const;
+    
+    // Actual reshape (may copy)
+    Tensor reshape(const Shape& new_shape) const;
+};
+
+bool can_broadcast(const Shape& a, const Shape& b);
+Shape compute_broadcast_shape(const Shape& a, const Shape& b);
+```
+
+Ejemplo broadcast:
+```cpp
+// (3,1) + (1,3) → (3,3)
+Tensor a({3, 1});  // [[1], [2], [3]]
+Tensor b({1, 3});  // [[1, 2, 3]]
+Tensor c = broadcast(a, b);  // [[2,3,4], [3,4,5], [4,5,6]]
+```
+
+RIESGO SI NO SE IMPLEMENTA:
+- Operaciones con shapes incompatibles fallan silenciosamente
+- No se pueden hacer broadcasting ops eficientemente
+
+================================================================================
+PRIORIDAD 6 — TRAINING FRAMEWORK FEATURES
+================================================================================
+
+FALTANTES ACTUALMENTE:
+- Adam optimizer ✓ Ya existe (optim/Adam.hpp)
+- Gradient clipping ✓ Ya existe (Autograd.hpp::clip_grad)
+- detach() - NO
+- no_grad context - NO
+- Checkpointing - NO
+- Mixed precision - NO
+
+IMPLEMENTAR detach() y no_grad:
+
+```cpp
+struct NoGradGuard {
+    bool was_enabled;
+    NoGradGuard() : was_enabled(aresml::get_engine().is_grad_enabled()) {
+        aresml::get_engine().set_grad_enabled(false);
+    }
+    ~NoGradGuard() {
+        aresml::get_engine().set_grad_enabled(was_enabled);
+    }
+};
+
+// Usage:
+// with no_grad():
+{
+    NoGradGuard guard;
+    Tensor output = model.forward(input);  // No graph built
+}
+
+// tensor.detach():
+Tensor detach(const Tensor& t) {
+    Tensor result = t.clone();
+    result.set_requires_grad(false);
+    result.inputs.clear();
+    result.op.reset();
+    return result;
+}
+```
+
+RIESGO SI NO SE IMPLEMENTA:
+- Ineficiencia: graph building en inference
+- No se pueden hacer freezing de layers
+
+================================================================================
+RESUMEN DE ESTADO ACTUAL
+================================================================================
+
+✓ IMPLEMENTADO:
+- Autograd dinámico funcional
+- Linear + MSE backward correcto
+- CrossEntropy funcionando
+- RMSNorm con backward
+- Adam optimizer
+- Gradient clipping
+
+⚠️ PARCIAL:
+- Attention backward (esqueleto, no completo)
+- zero_grad fix (funciona para training loop)
+
+🔴 PENDIENTE CRÍTICO:
+- Ownership model (raw pointers + const_cast)
+- Attention backward completo
+- BLAS integration
+
+🟡 PENDIENTE:
+- Graph engine moderno
+- Broadcasting formal
+- detach/no_grad
+
+================================================================================
+PRÓXIMOS PASOS RECOMENDADOS
+================================================================================
+
+1. PRIORIDAD ALTA (inmediato):
+   - Implementar Attention backward completo (PRIORIDAD 2)
+   - Integrar OpenBLAS (PRIORIDAD 3)
+
+2. PRIORIDAD MEDIA (esta semana):
+   - Refactorizar ownership (PRIORIDAD 1)
+   - Agregar detach/no_grad (PRIORIDAD 6)
+
+3. PRIORIDAD BAJA (próxima semana):
+   - Graph context moderno (PRIORIDAD 4)
+   - Broadcasting (PRIORIDAD 5)
+
+================================================================================
+FIN DEL REPORTE
+================================================================================

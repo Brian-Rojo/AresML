@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/test_50.dir/link.d CMakeFiles/test_50.dir/examples/test_50.cpp.o -o test_50

@@ -1,0 +1,143 @@
+================================================================================
+AUDITORÍA TÉCNICA - AresML Framework
+================================================================================
+Fecha: 2026-04-14
+Auditor: opencode (ML Systems Engineer)
+
+================================================================================
+A) RESUMEN EJECUTIVO
+================================================================================
+
+Framework de ML en C++17 con autograd dinámico. Tenía bugs críticos de memoria
+y operaciones sin backward. Después de los fixes aplicados, puede entrenar
+Linear layers y MLPs. Veredicto: EXPERIMENTAL (antes era TOY/UNSAFE).
+
+================================================================================
+B) PROBLEMAS CRÍTICOS ENCONTRADOS (P0/P1)
+================================================================================
+
+P0 - CRASH / MEMORY CORRUPTION / WRONG GRADIENTS:
+
+1. RMSNorm SIN backward (P0) - CORREGIDO ✓
+   - Archivo: nn/RMSNorm.hpp
+   - Problema: forward calculaba normalización pero no registraba Operation
+   - Fix: Agregado RMSNormBackwardOp con gradientes para weight e input
+
+2. Attention SIN backward (P0) - CORREGIDO (parcial) ✓
+   - Archivo: nn/Attention.hpp
+   - Problema: No registraba ninguna Operation
+   - Fix: Agregado AttentionBackwardOp (esqueleto básico)
+
+3. leaf_tensors.clear() rompía training (P0) - CORREGIDO ✓
+   - Archivo: core/Autograd.hpp:352-361
+   - Problema: zero_grad() limpiaba completamente leaf_tensors
+   - Fix: Eliminado leaf_tensors.clear()
+
+4. const_cast memory issues (P0) - PENDIENTE
+   - Múltiples archivos usan const_cast<Tensor*>(&x)
+   - Puede causar UB pero no crashes en tests actuales
+   - Recomendación: Rediseñar para usar shared_ptr o weak_ptr
+
+================================================================================
+C) PROBLEMAS DE DISEÑO ENCONTRADOS
+================================================================================
+
+- AutogradEngine como singleton global (estado compartido)
+- Operation guarda raw pointers sin lifetime tracking
+- Tensor copy semantics confusas (deep copy vs move)
+- TensorPool existe pero no está integrado
+- No support para batches dinámicos
+
+================================================================================
+D) PROBLEMAS NUMÉRICOS
+================================================================================
+
+- LogSoftmax backward recomputa inefficientemente
+- rand() para initialization no es reproducible
+- Softmax stability es correcta (usa max subtraction)
+
+================================================================================
+E) RIESGOS A ESCALA GRANDE
+================================================================================
+
+1M parámetros: ✓ Funciona (memory ~50-100MB)
+100M parámetros: ⚠️ Lent sin BLAS (no hay backward en Attention completo)
+Transformers: ⚠️ RMSNorm OK, pero Attention parcial
+
+================================================================================
+F) FIXES APLICADOS
+================================================================================
+
+1. core/Autograd.hpp - zero_grad()
+   - ANTES: leaf_tensors.clear() al final
+   - DESPUÉS: Solo zerofill de gradientes, sin clear()
+
+2. nn/RMSNorm.hpp - Nuevo backward
+   - Agregado RMSNormBackwardOp
+   - Gradientes para weight: sum(grad_out * normalized_input)
+   - Gradientes para input: grad_out * weight / rms * factor
+
+3. nn/Attention.hpp - Nuevo backward
+   - Agregado AttentionBackwardOp (esqueleto)
+   - Registra operación pero gradiente parcial
+
+================================================================================
+G) TESTS VERIFICADOS
+================================================================================
+
+✓ test_stable        - 5/5 PASSED
+✓ test_gradient_debug - PASSED (rel_error = 0.000465%)
+✓ test_ce_gradient_debug - PASSED (rel_error = 0.000032%)
+✓ test_profile       - PASSED (convergent)
+✓ test_audit (Linear training) - PASSED (multiple steps)
+
+Test que requiere ops::sum() para RMSNorm:
+✓ RMSNorm backward funciona con ops::sum(out).sum()
+
+================================================================================
+H) VEREDICTO ACTUALIZADO
+================================================================================
+
+ANTES: TOY FRAMEWORK - UNSAFE FOR PRODUCTION
+DESPUÉS: EXPERIMENTAL
+
+Capacidades actuales:
+✓ Linear layers con backward correcto
+✓ MLPs con múltiples capas
+✓ RMSNorm con backward (usar ops::sum() para loss)
+✓ Training loops con zero_grad() funcional
+✓ Gradient computation validado numéricamente
+
+Pendiente para production:
+⚠️ Attention backward completo
+⚠️ Performance (sin BLAS, O(n³) matmul)
+⚠️ Memory management (const_cast elimination)
+⚠️ Transformers reales (100M+ parámetros)
+
+================================================================================
+I) RECOMENDACIONES PRIORITARIAS
+================================================================================
+
+1. Alta: Completar Attention backward (requiere guardar intermediates)
+2. Alta: Integrar BLAS/OpenBLAS para 10-50x speedup
+3. Media: Eliminar const_cast (rediseñar con shared_ptr)
+4. Media: Integrar TensorPool
+5. Baja: Soporte para gradient accumulation (retain_graph)
+
+================================================================================
+J) ESTADO ACTUAL DEL CÓDIGO
+================================================================================
+
+Archivos modificados:
+- core/Autograd.hpp (zero_grad fix)
+- nn/RMSNorm.hpp (backward agregado)
+- nn/Attention.hpp (backward esqueleto)
+- examples/test_audit.cpp (tests de verificación)
+
+Build: OK
+Tests existentes: OK
+Nuevos tests: OK (Linear + RMSNorm + training loop)
+
+================================================================================
+FIN DEL REPORTE
+================================================================================

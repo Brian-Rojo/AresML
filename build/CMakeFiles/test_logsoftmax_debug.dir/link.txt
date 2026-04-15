@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/test_logsoftmax_debug.dir/link.d CMakeFiles/test_logsoftmax_debug.dir/examples/test_logsoftmax_debug.cpp.o -o test_logsoftmax_debug

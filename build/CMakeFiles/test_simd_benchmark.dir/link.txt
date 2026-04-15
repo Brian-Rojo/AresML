@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/test_simd_benchmark.dir/link.d CMakeFiles/test_simd_benchmark.dir/examples/test_simd_benchmark.cpp.o -o test_simd_benchmark

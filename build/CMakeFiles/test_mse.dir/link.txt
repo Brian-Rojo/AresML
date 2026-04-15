@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/test_mse.dir/link.d CMakeFiles/test_mse.dir/examples/test_mse.cpp.o -o test_mse

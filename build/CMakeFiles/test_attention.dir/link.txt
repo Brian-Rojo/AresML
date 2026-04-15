@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/test_attention.dir/link.d CMakeFiles/test_attention.dir/examples/test_attention.cpp.o -o test_attention
