@@ -80,4 +80,9 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/test_autograd_gradients.dir/DependInfo.cmake"
   "CMakeFiles/test_autograd_core.dir/DependInfo.cmake"
   "CMakeFiles/test_simd_benchmark.dir/DependInfo.cmake"
+  "CMakeFiles/test_fusion.dir/DependInfo.cmake"
+  "CMakeFiles/test_fusion_v2.dir/DependInfo.cmake"
+  "CMakeFiles/test_compile_graph.dir/DependInfo.cmake"
+  "CMakeFiles/test_memory_graph.dir/DependInfo.cmake"
+  "CMakeFiles/test_phase17_static.dir/DependInfo.cmake"
   )

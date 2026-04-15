@@ -555,6 +555,71 @@ test_simd_benchmark/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simd_benchmark.dir/build.make CMakeFiles/test_simd_benchmark.dir/build
 .PHONY : test_simd_benchmark/fast
 
+#=============================================================================
+# Target rules for targets named test_fusion
+
+# Build rule for target.
+test_fusion: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_fusion
+.PHONY : test_fusion
+
+# fast build rule for target.
+test_fusion/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/build
+.PHONY : test_fusion/fast
+
+#=============================================================================
+# Target rules for targets named test_fusion_v2
+
+# Build rule for target.
+test_fusion_v2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_fusion_v2
+.PHONY : test_fusion_v2
+
+# fast build rule for target.
+test_fusion_v2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/build
+.PHONY : test_fusion_v2/fast
+
+#=============================================================================
+# Target rules for targets named test_compile_graph
+
+# Build rule for target.
+test_compile_graph: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_compile_graph
+.PHONY : test_compile_graph
+
+# fast build rule for target.
+test_compile_graph/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/build
+.PHONY : test_compile_graph/fast
+
+#=============================================================================
+# Target rules for targets named test_memory_graph
+
+# Build rule for target.
+test_memory_graph: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_memory_graph
+.PHONY : test_memory_graph
+
+# fast build rule for target.
+test_memory_graph/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/build
+.PHONY : test_memory_graph/fast
+
+#=============================================================================
+# Target rules for targets named test_phase17_static
+
+# Build rule for target.
+test_phase17_static: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_phase17_static
+.PHONY : test_phase17_static
+
+# fast build rule for target.
+test_phase17_static/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/build
+.PHONY : test_phase17_static/fast
+
 examples/debug_train.o: examples/debug_train.cpp.o
 .PHONY : examples/debug_train.o
 
@@ -843,6 +908,30 @@ examples/test_cef.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_cef.dir/build.make CMakeFiles/test_cef.dir/examples/test_cef.cpp.s
 .PHONY : examples/test_cef.cpp.s
 
+examples/test_compile_graph.o: examples/test_compile_graph.cpp.o
+.PHONY : examples/test_compile_graph.o
+
+# target to build an object file
+examples/test_compile_graph.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/examples/test_compile_graph.cpp.o
+.PHONY : examples/test_compile_graph.cpp.o
+
+examples/test_compile_graph.i: examples/test_compile_graph.cpp.i
+.PHONY : examples/test_compile_graph.i
+
+# target to preprocess a source file
+examples/test_compile_graph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/examples/test_compile_graph.cpp.i
+.PHONY : examples/test_compile_graph.cpp.i
+
+examples/test_compile_graph.s: examples/test_compile_graph.cpp.s
+.PHONY : examples/test_compile_graph.s
+
+# target to generate assembly for a file
+examples/test_compile_graph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/examples/test_compile_graph.cpp.s
+.PHONY : examples/test_compile_graph.cpp.s
+
 examples/test_debug.o: examples/test_debug.cpp.o
 .PHONY : examples/test_debug.o
 
@@ -890,6 +979,54 @@ examples/test_forward.s: examples/test_forward.cpp.s
 examples/test_forward.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_forward.dir/build.make CMakeFiles/test_forward.dir/examples/test_forward.cpp.s
 .PHONY : examples/test_forward.cpp.s
+
+examples/test_fusion.o: examples/test_fusion.cpp.o
+.PHONY : examples/test_fusion.o
+
+# target to build an object file
+examples/test_fusion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/examples/test_fusion.cpp.o
+.PHONY : examples/test_fusion.cpp.o
+
+examples/test_fusion.i: examples/test_fusion.cpp.i
+.PHONY : examples/test_fusion.i
+
+# target to preprocess a source file
+examples/test_fusion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/examples/test_fusion.cpp.i
+.PHONY : examples/test_fusion.cpp.i
+
+examples/test_fusion.s: examples/test_fusion.cpp.s
+.PHONY : examples/test_fusion.s
+
+# target to generate assembly for a file
+examples/test_fusion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/examples/test_fusion.cpp.s
+.PHONY : examples/test_fusion.cpp.s
+
+examples/test_fusion_v2.o: examples/test_fusion_v2.cpp.o
+.PHONY : examples/test_fusion_v2.o
+
+# target to build an object file
+examples/test_fusion_v2.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/examples/test_fusion_v2.cpp.o
+.PHONY : examples/test_fusion_v2.cpp.o
+
+examples/test_fusion_v2.i: examples/test_fusion_v2.cpp.i
+.PHONY : examples/test_fusion_v2.i
+
+# target to preprocess a source file
+examples/test_fusion_v2.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/examples/test_fusion_v2.cpp.i
+.PHONY : examples/test_fusion_v2.cpp.i
+
+examples/test_fusion_v2.s: examples/test_fusion_v2.cpp.s
+.PHONY : examples/test_fusion_v2.s
+
+# target to generate assembly for a file
+examples/test_fusion_v2.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/examples/test_fusion_v2.cpp.s
+.PHONY : examples/test_fusion_v2.cpp.s
 
 examples/test_gpt_forward.o: examples/test_gpt_forward.cpp.o
 .PHONY : examples/test_gpt_forward.o
@@ -1059,6 +1196,30 @@ examples/test_logsoftmax_debug.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_logsoftmax_debug.dir/build.make CMakeFiles/test_logsoftmax_debug.dir/examples/test_logsoftmax_debug.cpp.s
 .PHONY : examples/test_logsoftmax_debug.cpp.s
 
+examples/test_memory_graph.o: examples/test_memory_graph.cpp.o
+.PHONY : examples/test_memory_graph.o
+
+# target to build an object file
+examples/test_memory_graph.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/examples/test_memory_graph.cpp.o
+.PHONY : examples/test_memory_graph.cpp.o
+
+examples/test_memory_graph.i: examples/test_memory_graph.cpp.i
+.PHONY : examples/test_memory_graph.i
+
+# target to preprocess a source file
+examples/test_memory_graph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/examples/test_memory_graph.cpp.i
+.PHONY : examples/test_memory_graph.cpp.i
+
+examples/test_memory_graph.s: examples/test_memory_graph.cpp.s
+.PHONY : examples/test_memory_graph.s
+
+# target to generate assembly for a file
+examples/test_memory_graph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/examples/test_memory_graph.cpp.s
+.PHONY : examples/test_memory_graph.cpp.s
+
 examples/test_mse.o: examples/test_mse.cpp.o
 .PHONY : examples/test_mse.o
 
@@ -1082,6 +1243,30 @@ examples/test_mse.s: examples/test_mse.cpp.s
 examples/test_mse.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mse.dir/build.make CMakeFiles/test_mse.dir/examples/test_mse.cpp.s
 .PHONY : examples/test_mse.cpp.s
+
+examples/test_phase17_static.o: examples/test_phase17_static.cpp.o
+.PHONY : examples/test_phase17_static.o
+
+# target to build an object file
+examples/test_phase17_static.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/examples/test_phase17_static.cpp.o
+.PHONY : examples/test_phase17_static.cpp.o
+
+examples/test_phase17_static.i: examples/test_phase17_static.cpp.i
+.PHONY : examples/test_phase17_static.i
+
+# target to preprocess a source file
+examples/test_phase17_static.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/examples/test_phase17_static.cpp.i
+.PHONY : examples/test_phase17_static.cpp.i
+
+examples/test_phase17_static.s: examples/test_phase17_static.cpp.s
+.PHONY : examples/test_phase17_static.s
+
+# target to generate assembly for a file
+examples/test_phase17_static.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/examples/test_phase17_static.cpp.s
+.PHONY : examples/test_phase17_static.cpp.s
 
 examples/test_profile.o: examples/test_profile.cpp.o
 .PHONY : examples/test_profile.o
@@ -1369,8 +1554,11 @@ help:
 	@echo "... test_ce_gradient_debug"
 	@echo "... test_ceb"
 	@echo "... test_cef"
+	@echo "... test_compile_graph"
 	@echo "... test_debug"
 	@echo "... test_forward"
+	@echo "... test_fusion"
+	@echo "... test_fusion_v2"
 	@echo "... test_gpt_forward"
 	@echo "... test_gpt_generation"
 	@echo "... test_gpt_overfit"
@@ -1378,7 +1566,9 @@ help:
 	@echo "... test_gradient_debug"
 	@echo "... test_linear"
 	@echo "... test_logsoftmax_debug"
+	@echo "... test_memory_graph"
 	@echo "... test_mse"
+	@echo "... test_phase17_static"
 	@echo "... test_profile"
 	@echo "... test_quick"
 	@echo "... test_simd_benchmark"
@@ -1425,12 +1615,21 @@ help:
 	@echo "... examples/test_cef.o"
 	@echo "... examples/test_cef.i"
 	@echo "... examples/test_cef.s"
+	@echo "... examples/test_compile_graph.o"
+	@echo "... examples/test_compile_graph.i"
+	@echo "... examples/test_compile_graph.s"
 	@echo "... examples/test_debug.o"
 	@echo "... examples/test_debug.i"
 	@echo "... examples/test_debug.s"
 	@echo "... examples/test_forward.o"
 	@echo "... examples/test_forward.i"
 	@echo "... examples/test_forward.s"
+	@echo "... examples/test_fusion.o"
+	@echo "... examples/test_fusion.i"
+	@echo "... examples/test_fusion.s"
+	@echo "... examples/test_fusion_v2.o"
+	@echo "... examples/test_fusion_v2.i"
+	@echo "... examples/test_fusion_v2.s"
 	@echo "... examples/test_gpt_forward.o"
 	@echo "... examples/test_gpt_forward.i"
 	@echo "... examples/test_gpt_forward.s"
@@ -1452,9 +1651,15 @@ help:
 	@echo "... examples/test_logsoftmax_debug.o"
 	@echo "... examples/test_logsoftmax_debug.i"
 	@echo "... examples/test_logsoftmax_debug.s"
+	@echo "... examples/test_memory_graph.o"
+	@echo "... examples/test_memory_graph.i"
+	@echo "... examples/test_memory_graph.s"
 	@echo "... examples/test_mse.o"
 	@echo "... examples/test_mse.i"
 	@echo "... examples/test_mse.s"
+	@echo "... examples/test_phase17_static.o"
+	@echo "... examples/test_phase17_static.i"
+	@echo "... examples/test_phase17_static.s"
 	@echo "... examples/test_profile.o"
 	@echo "... examples/test_profile.i"
 	@echo "... examples/test_profile.s"

@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -Wall -g -O0 -Wl,--dependency-file=CMakeFiles/test_fusion.dir/link.d CMakeFiles/test_fusion.dir/examples/test_fusion.cpp.o -o test_fusion

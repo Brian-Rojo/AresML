@@ -31,6 +31,11 @@
 /home/mayer/Escritorio/AresML/build/CMakeFiles/test_autograd_gradients.dir
 /home/mayer/Escritorio/AresML/build/CMakeFiles/test_autograd_core.dir
 /home/mayer/Escritorio/AresML/build/CMakeFiles/test_simd_benchmark.dir
+/home/mayer/Escritorio/AresML/build/CMakeFiles/test_fusion.dir
+/home/mayer/Escritorio/AresML/build/CMakeFiles/test_fusion_v2.dir
+/home/mayer/Escritorio/AresML/build/CMakeFiles/test_compile_graph.dir
+/home/mayer/Escritorio/AresML/build/CMakeFiles/test_memory_graph.dir
+/home/mayer/Escritorio/AresML/build/CMakeFiles/test_phase17_static.dir
 /home/mayer/Escritorio/AresML/build/CMakeFiles/test.dir
 /home/mayer/Escritorio/AresML/build/CMakeFiles/edit_cache.dir
 /home/mayer/Escritorio/AresML/build/CMakeFiles/rebuild_cache.dir

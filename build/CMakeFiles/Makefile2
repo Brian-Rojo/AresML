@@ -96,6 +96,11 @@ all: CMakeFiles/test_simple_linear.dir/all
 all: CMakeFiles/test_autograd_gradients.dir/all
 all: CMakeFiles/test_autograd_core.dir/all
 all: CMakeFiles/test_simd_benchmark.dir/all
+all: CMakeFiles/test_fusion.dir/all
+all: CMakeFiles/test_fusion_v2.dir/all
+all: CMakeFiles/test_compile_graph.dir/all
+all: CMakeFiles/test_memory_graph.dir/all
+all: CMakeFiles/test_phase17_static.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -132,6 +137,11 @@ codegen: CMakeFiles/test_simple_linear.dir/codegen
 codegen: CMakeFiles/test_autograd_gradients.dir/codegen
 codegen: CMakeFiles/test_autograd_core.dir/codegen
 codegen: CMakeFiles/test_simd_benchmark.dir/codegen
+codegen: CMakeFiles/test_fusion.dir/codegen
+codegen: CMakeFiles/test_fusion_v2.dir/codegen
+codegen: CMakeFiles/test_compile_graph.dir/codegen
+codegen: CMakeFiles/test_memory_graph.dir/codegen
+codegen: CMakeFiles/test_phase17_static.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -172,6 +182,11 @@ clean: CMakeFiles/test_simple_linear.dir/clean
 clean: CMakeFiles/test_autograd_gradients.dir/clean
 clean: CMakeFiles/test_autograd_core.dir/clean
 clean: CMakeFiles/test_simd_benchmark.dir/clean
+clean: CMakeFiles/test_fusion.dir/clean
+clean: CMakeFiles/test_fusion_v2.dir/clean
+clean: CMakeFiles/test_compile_graph.dir/clean
+clean: CMakeFiles/test_memory_graph.dir/clean
+clean: CMakeFiles/test_phase17_static.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -181,7 +196,7 @@ clean: CMakeFiles/test_simd_benchmark.dir/clean
 CMakeFiles/train.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=61,62 "Built target train"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=71,72 "Built target train"
 .PHONY : CMakeFiles/train.dir/all
 
 # Build rule for subdir invocation for target.
@@ -198,7 +213,7 @@ train: CMakeFiles/train.dir/rule
 # codegen rule for target.
 CMakeFiles/train.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train.dir/build.make CMakeFiles/train.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=61,62 "Finished codegen for target train"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=71,72 "Finished codegen for target train"
 .PHONY : CMakeFiles/train.dir/codegen
 
 # clean rule for target.
@@ -213,7 +228,7 @@ CMakeFiles/train.dir/clean:
 CMakeFiles/train_simple.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train_simple.dir/build.make CMakeFiles/train_simple.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train_simple.dir/build.make CMakeFiles/train_simple.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=63,64 "Built target train_simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=73,74 "Built target train_simple"
 .PHONY : CMakeFiles/train_simple.dir/all
 
 # Build rule for subdir invocation for target.
@@ -230,7 +245,7 @@ train_simple: CMakeFiles/train_simple.dir/rule
 # codegen rule for target.
 CMakeFiles/train_simple.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train_simple.dir/build.make CMakeFiles/train_simple.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=63,64 "Finished codegen for target train_simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=73,74 "Finished codegen for target train_simple"
 .PHONY : CMakeFiles/train_simple.dir/codegen
 
 # clean rule for target.
@@ -245,7 +260,7 @@ CMakeFiles/train_simple.dir/clean:
 CMakeFiles/test_linear.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_linear.dir/build.make CMakeFiles/test_linear.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_linear.dir/build.make CMakeFiles/test_linear.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=41,42 "Built target test_linear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=47,48 "Built target test_linear"
 .PHONY : CMakeFiles/test_linear.dir/all
 
 # Build rule for subdir invocation for target.
@@ -262,7 +277,7 @@ test_linear: CMakeFiles/test_linear.dir/rule
 # codegen rule for target.
 CMakeFiles/test_linear.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_linear.dir/build.make CMakeFiles/test_linear.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=41,42 "Finished codegen for target test_linear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=47,48 "Finished codegen for target test_linear"
 .PHONY : CMakeFiles/test_linear.dir/codegen
 
 # clean rule for target.
@@ -373,7 +388,7 @@ CMakeFiles/test_block.dir/clean:
 CMakeFiles/test_forward.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_forward.dir/build.make CMakeFiles/test_forward.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_forward.dir/build.make CMakeFiles/test_forward.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=29,30 "Built target test_forward"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=31,32 "Built target test_forward"
 .PHONY : CMakeFiles/test_forward.dir/all
 
 # Build rule for subdir invocation for target.
@@ -390,7 +405,7 @@ test_forward: CMakeFiles/test_forward.dir/rule
 # codegen rule for target.
 CMakeFiles/test_forward.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_forward.dir/build.make CMakeFiles/test_forward.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=29,30 "Finished codegen for target test_forward"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=31,32 "Finished codegen for target test_forward"
 .PHONY : CMakeFiles/test_forward.dir/codegen
 
 # clean rule for target.
@@ -405,7 +420,7 @@ CMakeFiles/test_forward.dir/clean:
 CMakeFiles/train_simple_linear.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train_simple_linear.dir/build.make CMakeFiles/train_simple_linear.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train_simple_linear.dir/build.make CMakeFiles/train_simple_linear.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=65,66 "Built target train_simple_linear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=75,76 "Built target train_simple_linear"
 .PHONY : CMakeFiles/train_simple_linear.dir/all
 
 # Build rule for subdir invocation for target.
@@ -422,7 +437,7 @@ train_simple_linear: CMakeFiles/train_simple_linear.dir/rule
 # codegen rule for target.
 CMakeFiles/train_simple_linear.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/train_simple_linear.dir/build.make CMakeFiles/train_simple_linear.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=65,66 "Finished codegen for target train_simple_linear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=75,76 "Finished codegen for target train_simple_linear"
 .PHONY : CMakeFiles/train_simple_linear.dir/codegen
 
 # clean rule for target.
@@ -469,7 +484,7 @@ CMakeFiles/debug_train.dir/clean:
 CMakeFiles/test_stable.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stable.dir/build.make CMakeFiles/test_stable.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stable.dir/build.make CMakeFiles/test_stable.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=57,58 "Built target test_stable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=67,68 "Built target test_stable"
 .PHONY : CMakeFiles/test_stable.dir/all
 
 # Build rule for subdir invocation for target.
@@ -486,7 +501,7 @@ test_stable: CMakeFiles/test_stable.dir/rule
 # codegen rule for target.
 CMakeFiles/test_stable.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_stable.dir/build.make CMakeFiles/test_stable.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=57,58 "Finished codegen for target test_stable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=67,68 "Finished codegen for target test_stable"
 .PHONY : CMakeFiles/test_stable.dir/codegen
 
 # clean rule for target.
@@ -501,7 +516,7 @@ CMakeFiles/test_stable.dir/clean:
 CMakeFiles/test_debug.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_debug.dir/build.make CMakeFiles/test_debug.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_debug.dir/build.make CMakeFiles/test_debug.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=27,28 "Built target test_debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=29,30 "Built target test_debug"
 .PHONY : CMakeFiles/test_debug.dir/all
 
 # Build rule for subdir invocation for target.
@@ -518,7 +533,7 @@ test_debug: CMakeFiles/test_debug.dir/rule
 # codegen rule for target.
 CMakeFiles/test_debug.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_debug.dir/build.make CMakeFiles/test_debug.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=27,28 "Finished codegen for target test_debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=29,30 "Finished codegen for target test_debug"
 .PHONY : CMakeFiles/test_debug.dir/codegen
 
 # clean rule for target.
@@ -533,7 +548,7 @@ CMakeFiles/test_debug.dir/clean:
 CMakeFiles/test_quick.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_quick.dir/build.make CMakeFiles/test_quick.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_quick.dir/build.make CMakeFiles/test_quick.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=49,50 "Built target test_quick"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=59,60 "Built target test_quick"
 .PHONY : CMakeFiles/test_quick.dir/all
 
 # Build rule for subdir invocation for target.
@@ -550,7 +565,7 @@ test_quick: CMakeFiles/test_quick.dir/rule
 # codegen rule for target.
 CMakeFiles/test_quick.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_quick.dir/build.make CMakeFiles/test_quick.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=49,50 "Finished codegen for target test_quick"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=59,60 "Finished codegen for target test_quick"
 .PHONY : CMakeFiles/test_quick.dir/codegen
 
 # clean rule for target.
@@ -565,7 +580,7 @@ CMakeFiles/test_quick.dir/clean:
 CMakeFiles/test_v03.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_v03.dir/build.make CMakeFiles/test_v03.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_v03.dir/build.make CMakeFiles/test_v03.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=59,60 "Built target test_v03"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=69,70 "Built target test_v03"
 .PHONY : CMakeFiles/test_v03.dir/all
 
 # Build rule for subdir invocation for target.
@@ -582,7 +597,7 @@ test_v03: CMakeFiles/test_v03.dir/rule
 # codegen rule for target.
 CMakeFiles/test_v03.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_v03.dir/build.make CMakeFiles/test_v03.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=59,60 "Finished codegen for target test_v03"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=69,70 "Finished codegen for target test_v03"
 .PHONY : CMakeFiles/test_v03.dir/codegen
 
 # clean rule for target.
@@ -629,7 +644,7 @@ CMakeFiles/test_ce.dir/clean:
 CMakeFiles/test_mse.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mse.dir/build.make CMakeFiles/test_mse.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mse.dir/build.make CMakeFiles/test_mse.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=45,46 "Built target test_mse"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=53,54 "Built target test_mse"
 .PHONY : CMakeFiles/test_mse.dir/all
 
 # Build rule for subdir invocation for target.
@@ -646,7 +661,7 @@ test_mse: CMakeFiles/test_mse.dir/rule
 # codegen rule for target.
 CMakeFiles/test_mse.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mse.dir/build.make CMakeFiles/test_mse.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=45,46 "Finished codegen for target test_mse"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=53,54 "Finished codegen for target test_mse"
 .PHONY : CMakeFiles/test_mse.dir/codegen
 
 # clean rule for target.
@@ -725,7 +740,7 @@ CMakeFiles/test_ceb.dir/clean:
 CMakeFiles/test_simple.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple.dir/build.make CMakeFiles/test_simple.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple.dir/build.make CMakeFiles/test_simple.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=53,54 "Built target test_simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=63,64 "Built target test_simple"
 .PHONY : CMakeFiles/test_simple.dir/all
 
 # Build rule for subdir invocation for target.
@@ -742,7 +757,7 @@ test_simple: CMakeFiles/test_simple.dir/rule
 # codegen rule for target.
 CMakeFiles/test_simple.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple.dir/build.make CMakeFiles/test_simple.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=53,54 "Finished codegen for target test_simple"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=63,64 "Finished codegen for target test_simple"
 .PHONY : CMakeFiles/test_simple.dir/codegen
 
 # clean rule for target.
@@ -821,7 +836,7 @@ CMakeFiles/test_100.dir/clean:
 CMakeFiles/test_gradient_check.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gradient_check.dir/build.make CMakeFiles/test_gradient_check.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gradient_check.dir/build.make CMakeFiles/test_gradient_check.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=37,38 "Built target test_gradient_check"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=43,44 "Built target test_gradient_check"
 .PHONY : CMakeFiles/test_gradient_check.dir/all
 
 # Build rule for subdir invocation for target.
@@ -838,7 +853,7 @@ test_gradient_check: CMakeFiles/test_gradient_check.dir/rule
 # codegen rule for target.
 CMakeFiles/test_gradient_check.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gradient_check.dir/build.make CMakeFiles/test_gradient_check.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=37,38 "Finished codegen for target test_gradient_check"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=43,44 "Finished codegen for target test_gradient_check"
 .PHONY : CMakeFiles/test_gradient_check.dir/codegen
 
 # clean rule for target.
@@ -853,7 +868,7 @@ CMakeFiles/test_gradient_check.dir/clean:
 CMakeFiles/test_gradient_debug.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gradient_debug.dir/build.make CMakeFiles/test_gradient_debug.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gradient_debug.dir/build.make CMakeFiles/test_gradient_debug.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=39,40 "Built target test_gradient_debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=45,46 "Built target test_gradient_debug"
 .PHONY : CMakeFiles/test_gradient_debug.dir/all
 
 # Build rule for subdir invocation for target.
@@ -870,7 +885,7 @@ test_gradient_debug: CMakeFiles/test_gradient_debug.dir/rule
 # codegen rule for target.
 CMakeFiles/test_gradient_debug.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gradient_debug.dir/build.make CMakeFiles/test_gradient_debug.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=39,40 "Finished codegen for target test_gradient_debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=45,46 "Finished codegen for target test_gradient_debug"
 .PHONY : CMakeFiles/test_gradient_debug.dir/codegen
 
 # clean rule for target.
@@ -885,7 +900,7 @@ CMakeFiles/test_gradient_debug.dir/clean:
 CMakeFiles/test_logsoftmax_debug.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_logsoftmax_debug.dir/build.make CMakeFiles/test_logsoftmax_debug.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_logsoftmax_debug.dir/build.make CMakeFiles/test_logsoftmax_debug.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=43,44 "Built target test_logsoftmax_debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=49,50 "Built target test_logsoftmax_debug"
 .PHONY : CMakeFiles/test_logsoftmax_debug.dir/all
 
 # Build rule for subdir invocation for target.
@@ -902,7 +917,7 @@ test_logsoftmax_debug: CMakeFiles/test_logsoftmax_debug.dir/rule
 # codegen rule for target.
 CMakeFiles/test_logsoftmax_debug.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_logsoftmax_debug.dir/build.make CMakeFiles/test_logsoftmax_debug.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=43,44 "Finished codegen for target test_logsoftmax_debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=49,50 "Finished codegen for target test_logsoftmax_debug"
 .PHONY : CMakeFiles/test_logsoftmax_debug.dir/codegen
 
 # clean rule for target.
@@ -949,7 +964,7 @@ CMakeFiles/test_ce_gradient_debug.dir/clean:
 CMakeFiles/test_profile.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_profile.dir/build.make CMakeFiles/test_profile.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_profile.dir/build.make CMakeFiles/test_profile.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=47,48 "Built target test_profile"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=57,58 "Built target test_profile"
 .PHONY : CMakeFiles/test_profile.dir/all
 
 # Build rule for subdir invocation for target.
@@ -966,7 +981,7 @@ test_profile: CMakeFiles/test_profile.dir/rule
 # codegen rule for target.
 CMakeFiles/test_profile.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_profile.dir/build.make CMakeFiles/test_profile.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=47,48 "Finished codegen for target test_profile"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=57,58 "Finished codegen for target test_profile"
 .PHONY : CMakeFiles/test_profile.dir/codegen
 
 # clean rule for target.
@@ -1013,7 +1028,7 @@ CMakeFiles/test_audit.dir/clean:
 CMakeFiles/test_gpt_forward.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_forward.dir/build.make CMakeFiles/test_gpt_forward.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_forward.dir/build.make CMakeFiles/test_gpt_forward.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=31,32 "Built target test_gpt_forward"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=37,38 "Built target test_gpt_forward"
 .PHONY : CMakeFiles/test_gpt_forward.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1030,7 +1045,7 @@ test_gpt_forward: CMakeFiles/test_gpt_forward.dir/rule
 # codegen rule for target.
 CMakeFiles/test_gpt_forward.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_forward.dir/build.make CMakeFiles/test_gpt_forward.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=31,32 "Finished codegen for target test_gpt_forward"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=37,38 "Finished codegen for target test_gpt_forward"
 .PHONY : CMakeFiles/test_gpt_forward.dir/codegen
 
 # clean rule for target.
@@ -1045,7 +1060,7 @@ CMakeFiles/test_gpt_forward.dir/clean:
 CMakeFiles/test_gpt_overfit.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_overfit.dir/build.make CMakeFiles/test_gpt_overfit.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_overfit.dir/build.make CMakeFiles/test_gpt_overfit.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=35,36 "Built target test_gpt_overfit"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=41,42 "Built target test_gpt_overfit"
 .PHONY : CMakeFiles/test_gpt_overfit.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1062,7 +1077,7 @@ test_gpt_overfit: CMakeFiles/test_gpt_overfit.dir/rule
 # codegen rule for target.
 CMakeFiles/test_gpt_overfit.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_overfit.dir/build.make CMakeFiles/test_gpt_overfit.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=35,36 "Finished codegen for target test_gpt_overfit"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=41,42 "Finished codegen for target test_gpt_overfit"
 .PHONY : CMakeFiles/test_gpt_overfit.dir/codegen
 
 # clean rule for target.
@@ -1077,7 +1092,7 @@ CMakeFiles/test_gpt_overfit.dir/clean:
 CMakeFiles/test_gpt_generation.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_generation.dir/build.make CMakeFiles/test_gpt_generation.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_generation.dir/build.make CMakeFiles/test_gpt_generation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=33,34 "Built target test_gpt_generation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=39,40 "Built target test_gpt_generation"
 .PHONY : CMakeFiles/test_gpt_generation.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1094,7 +1109,7 @@ test_gpt_generation: CMakeFiles/test_gpt_generation.dir/rule
 # codegen rule for target.
 CMakeFiles/test_gpt_generation.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_gpt_generation.dir/build.make CMakeFiles/test_gpt_generation.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=33,34 "Finished codegen for target test_gpt_generation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=39,40 "Finished codegen for target test_gpt_generation"
 .PHONY : CMakeFiles/test_gpt_generation.dir/codegen
 
 # clean rule for target.
@@ -1109,7 +1124,7 @@ CMakeFiles/test_gpt_generation.dir/clean:
 CMakeFiles/test_simple_linear.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_linear.dir/build.make CMakeFiles/test_simple_linear.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_linear.dir/build.make CMakeFiles/test_simple_linear.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=55,56 "Built target test_simple_linear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=65,66 "Built target test_simple_linear"
 .PHONY : CMakeFiles/test_simple_linear.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1126,7 +1141,7 @@ test_simple_linear: CMakeFiles/test_simple_linear.dir/rule
 # codegen rule for target.
 CMakeFiles/test_simple_linear.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simple_linear.dir/build.make CMakeFiles/test_simple_linear.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=55,56 "Finished codegen for target test_simple_linear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=65,66 "Finished codegen for target test_simple_linear"
 .PHONY : CMakeFiles/test_simple_linear.dir/codegen
 
 # clean rule for target.
@@ -1205,7 +1220,7 @@ CMakeFiles/test_autograd_core.dir/clean:
 CMakeFiles/test_simd_benchmark.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simd_benchmark.dir/build.make CMakeFiles/test_simd_benchmark.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simd_benchmark.dir/build.make CMakeFiles/test_simd_benchmark.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=51,52 "Built target test_simd_benchmark"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=61,62 "Built target test_simd_benchmark"
 .PHONY : CMakeFiles/test_simd_benchmark.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1222,13 +1237,173 @@ test_simd_benchmark: CMakeFiles/test_simd_benchmark.dir/rule
 # codegen rule for target.
 CMakeFiles/test_simd_benchmark.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simd_benchmark.dir/build.make CMakeFiles/test_simd_benchmark.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=51,52 "Finished codegen for target test_simd_benchmark"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=61,62 "Finished codegen for target test_simd_benchmark"
 .PHONY : CMakeFiles/test_simd_benchmark.dir/codegen
 
 # clean rule for target.
 CMakeFiles/test_simd_benchmark.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_simd_benchmark.dir/build.make CMakeFiles/test_simd_benchmark.dir/clean
 .PHONY : CMakeFiles/test_simd_benchmark.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_fusion.dir
+
+# All Build rule for target.
+CMakeFiles/test_fusion.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=33,34 "Built target test_fusion"
+.PHONY : CMakeFiles/test_fusion.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_fusion.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_fusion.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_fusion.dir/rule
+
+# Convenience name for target.
+test_fusion: CMakeFiles/test_fusion.dir/rule
+.PHONY : test_fusion
+
+# codegen rule for target.
+CMakeFiles/test_fusion.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=33,34 "Finished codegen for target test_fusion"
+.PHONY : CMakeFiles/test_fusion.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_fusion.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion.dir/build.make CMakeFiles/test_fusion.dir/clean
+.PHONY : CMakeFiles/test_fusion.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_fusion_v2.dir
+
+# All Build rule for target.
+CMakeFiles/test_fusion_v2.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=35,36 "Built target test_fusion_v2"
+.PHONY : CMakeFiles/test_fusion_v2.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_fusion_v2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_fusion_v2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_fusion_v2.dir/rule
+
+# Convenience name for target.
+test_fusion_v2: CMakeFiles/test_fusion_v2.dir/rule
+.PHONY : test_fusion_v2
+
+# codegen rule for target.
+CMakeFiles/test_fusion_v2.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=35,36 "Finished codegen for target test_fusion_v2"
+.PHONY : CMakeFiles/test_fusion_v2.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_fusion_v2.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_fusion_v2.dir/build.make CMakeFiles/test_fusion_v2.dir/clean
+.PHONY : CMakeFiles/test_fusion_v2.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_compile_graph.dir
+
+# All Build rule for target.
+CMakeFiles/test_compile_graph.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=27,28 "Built target test_compile_graph"
+.PHONY : CMakeFiles/test_compile_graph.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_compile_graph.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_compile_graph.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_compile_graph.dir/rule
+
+# Convenience name for target.
+test_compile_graph: CMakeFiles/test_compile_graph.dir/rule
+.PHONY : test_compile_graph
+
+# codegen rule for target.
+CMakeFiles/test_compile_graph.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=27,28 "Finished codegen for target test_compile_graph"
+.PHONY : CMakeFiles/test_compile_graph.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_compile_graph.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_compile_graph.dir/build.make CMakeFiles/test_compile_graph.dir/clean
+.PHONY : CMakeFiles/test_compile_graph.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_memory_graph.dir
+
+# All Build rule for target.
+CMakeFiles/test_memory_graph.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=51,52 "Built target test_memory_graph"
+.PHONY : CMakeFiles/test_memory_graph.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_memory_graph.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_memory_graph.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_memory_graph.dir/rule
+
+# Convenience name for target.
+test_memory_graph: CMakeFiles/test_memory_graph.dir/rule
+.PHONY : test_memory_graph
+
+# codegen rule for target.
+CMakeFiles/test_memory_graph.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=51,52 "Finished codegen for target test_memory_graph"
+.PHONY : CMakeFiles/test_memory_graph.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_memory_graph.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_memory_graph.dir/build.make CMakeFiles/test_memory_graph.dir/clean
+.PHONY : CMakeFiles/test_memory_graph.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_phase17_static.dir
+
+# All Build rule for target.
+CMakeFiles/test_phase17_static.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=55,56 "Built target test_phase17_static"
+.PHONY : CMakeFiles/test_phase17_static.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_phase17_static.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_phase17_static.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mayer/Escritorio/AresML/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_phase17_static.dir/rule
+
+# Convenience name for target.
+test_phase17_static: CMakeFiles/test_phase17_static.dir/rule
+.PHONY : test_phase17_static
+
+# codegen rule for target.
+CMakeFiles/test_phase17_static.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/mayer/Escritorio/AresML/build/CMakeFiles --progress-num=55,56 "Finished codegen for target test_phase17_static"
+.PHONY : CMakeFiles/test_phase17_static.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_phase17_static.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_phase17_static.dir/build.make CMakeFiles/test_phase17_static.dir/clean
+.PHONY : CMakeFiles/test_phase17_static.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

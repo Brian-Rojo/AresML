@@ -11,8 +11,24 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -ffast-math -Wall")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
 set(CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core)
+set(CORE_IR_V2_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/ir_v2)
+set(CORE_IR_V3_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/ir_v3)
+set(CORE_FUSION_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/fusion)
+set(CORE_COMPILER_V3_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/compiler_v3)
+set(CORE_KERNEL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/kernel_specialization)
+set(CORE_LAYOUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/layout_optimizer)
+set(CORE_EXECUTION_V3_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/execution_v3)
+set(CORE_RUNTIME_V3_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/runtime_v3)
+set(CORE_MEMORY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/memory)
+set(CORE_SCHEDULER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/scheduler)
+set(CORE_PREFETCH_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/prefetch)
 set(CORE_SIMD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/simd)
 set(CORE_THREADING_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/threading)
+set(CORE_MEMORY_GRAPH_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/memory_graph)
+set(CORE_COMPILER_V4_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/compiler_v4)
+set(CORE_RUNTIME_V2_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/runtime_v2)
+set(CORE_MEMORY_PLAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/memory_plan)
+set(CORE_LOWERING_DIR ${CMAKE_CURRENT_SOURCE_DIR}/core/lowering)
 set(NN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/nn)
 set(NN_TRANSFORMER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/nn/transformer)
 set(ENGINE_GPT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/engine/gpt)
@@ -24,8 +40,24 @@ set(UTILS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/utils)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CORE_DIR})
+include_directories(${CORE_IR_V2_DIR})
+include_directories(${CORE_IR_V3_DIR})
+include_directories(${CORE_FUSION_DIR})
+include_directories(${CORE_COMPILER_V3_DIR})
+include_directories(${CORE_KERNEL_DIR})
+include_directories(${CORE_LAYOUT_DIR})
+include_directories(${CORE_EXECUTION_V3_DIR})
+include_directories(${CORE_RUNTIME_V3_DIR})
+include_directories(${CORE_MEMORY_DIR})
+include_directories(${CORE_SCHEDULER_DIR})
+include_directories(${CORE_PREFETCH_DIR})
 include_directories(${CORE_SIMD_DIR})
 include_directories(${CORE_THREADING_DIR})
+include_directories(${CORE_MEMORY_GRAPH_DIR})
+include_directories(${CORE_COMPILER_V4_DIR})
+include_directories(${CORE_RUNTIME_V2_DIR})
+include_directories(${CORE_MEMORY_PLAN_DIR})
+include_directories(${CORE_LOWERING_DIR})
 include_directories(${NN_DIR})
 include_directories(${NN_TRANSFORMER_DIR})
 include_directories(${ENGINE_GPT_DIR})
@@ -38,6 +70,29 @@ include_directories(${UTILS_DIR})
 set(HEADER_SOURCES
     core/Tensor.hpp
     core/Autograd.hpp
+    core/ir_v2/IRNodeV2.hpp
+    core/ir_v2/IRGraphV2.hpp
+    core/ir_v3/IRNodeV3.hpp
+    core/ir_v3/IRGraphV3.hpp
+    core/fusion/PatternMatcher.hpp
+    core/fusion/FusionGroups.hpp
+    core/fusion/FusionEngineV2.hpp
+    core/compiler_v3/GraphCompilerV3.hpp
+    core/compiler_v3/GraphLoweringV3.hpp
+    core/compiler_v3/PassManagerV3.hpp
+    core/kernel_specialization/KernelDB.hpp
+    core/layout_optimizer/LayoutAnalyzer.hpp
+    core/execution_v3/ExecutionPlan.hpp
+    core/runtime_v3/PlanExecutor.hpp
+    core/memory/CachePlanner.hpp
+    core/memory/MemoryPlan.hpp
+    core/runtime/FusedKernelExecutor.hpp
+    core/scheduler/SchedulerV2.hpp
+    core/prefetch/PrefetchEngine.hpp
+    core/simd/SimdKernelsV2.hpp
+    core/memory_graph/MemoryGraphEngine.hpp
+    core/compiler_v4/GraphCompilerV4.hpp
+    core/runtime_v2/StaticRuntimeExecutor.hpp
     nn/Linear.hpp
     nn/RMSNorm.hpp
     nn/Attention.hpp
@@ -122,5 +177,20 @@ target_link_libraries(test_autograd_core aresml)
 
 add_executable(test_simd_benchmark examples/test_simd_benchmark.cpp)
 target_link_libraries(test_simd_benchmark aresml)
+
+add_executable(test_fusion examples/test_fusion.cpp)
+target_link_libraries(test_fusion aresml)
+
+add_executable(test_fusion_v2 examples/test_fusion_v2.cpp)
+target_link_libraries(test_fusion_v2 aresml)
+
+add_executable(test_compile_graph examples/test_compile_graph.cpp)
+target_link_libraries(test_compile_graph aresml)
+
+add_executable(test_memory_graph examples/test_memory_graph.cpp)
+target_link_libraries(test_memory_graph aresml)
+
+add_executable(test_phase17_static examples/test_phase17_static.cpp)
+target_link_libraries(test_phase17_static aresml)
 
 enable_testing()

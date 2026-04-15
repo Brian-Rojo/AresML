@@ -18,14 +18,20 @@ enum class IRType {
     PARAM,
     MATMUL,
     ADD,
+    MUL,
+    SUB,
     BIAS,
     RELU,
     SILU,
+    GELU,
     SOFTMAX,
     ATTENTION_QKV,
+    SUM,
     FUSED_LINEAR_RELU,
     FUSED_GEMM_BIAS,
     FUSED_GEMM_BIAS_RELU,
+    FUSED_ELEMWISE_CHAIN,
+    FUSED_ADD_MUL_RELU,
     OUTPUT,
 };
 
@@ -43,7 +49,9 @@ struct IRNode {
     bool is_fused() const {
         return type == IRType::FUSED_LINEAR_RELU ||
                type == IRType::FUSED_GEMM_BIAS ||
-               type == IRType::FUSED_GEMM_BIAS_RELU;
+               type == IRType::FUSED_GEMM_BIAS_RELU ||
+               type == IRType::FUSED_ELEMWISE_CHAIN ||
+               type == IRType::FUSED_ADD_MUL_RELU;
     }
     
     std::string type_name() const {
@@ -60,6 +68,8 @@ struct IRNode {
             case IRType::FUSED_LINEAR_RELU: return "FusedLinearReLU";
             case IRType::FUSED_GEMM_BIAS: return "FusedGemmBias";
             case IRType::FUSED_GEMM_BIAS_RELU: return "FusedGemmBiasReLU";
+            case IRType::FUSED_ELEMWISE_CHAIN: return "FusedElementwiseChain";
+            case IRType::FUSED_ADD_MUL_RELU: return "FusedAddMulReLU";
             default: return "Unknown";
         }
     }
@@ -242,6 +252,7 @@ public:
     static void run(IRGraph& graph) {
         fuse_linear_relu(graph);
         fuse_matmul_bias(graph);
+        fuse_elementwise_chain(graph);
     }
     
 private:
@@ -265,6 +276,28 @@ private:
             
             if (a->type == IRType::MATMUL && b->type == IRType::ADD) {
                 a->type = IRType::FUSED_GEMM_BIAS;
+                graph.nodes.erase(graph.nodes.begin() + i + 1);
+                if (i > 0) --i;
+            }
+        }
+    }
+    
+    static void fuse_elementwise_chain(IRGraph& graph) {
+        for (size_t i = 0; i + 1 < graph.nodes.size(); ++i) {
+            IRNode* a = graph.nodes[i].get();
+            IRNode* b = graph.nodes[i + 1].get();
+            
+            // Fuse add + mul
+            if (a->type == IRType::ADD && b->type == IRType::MUL) {
+                a->type = IRType::FUSED_ADD_MUL_RELU;
+                graph.nodes.erase(graph.nodes.begin() + i + 1);
+                if (i > 0) --i;
+            }
+            
+            // Fuse elementwise chains (add, mul, relu)
+            if ((a->type == IRType::ADD || a->type == IRType::MUL || a->type == IRType::RELU) &&
+                (b->type == IRType::ADD || b->type == IRType::MUL || b->type == IRType::RELU)) {
+                a->type = IRType::FUSED_ELEMWISE_CHAIN;
                 graph.nodes.erase(graph.nodes.begin() + i + 1);
                 if (i > 0) --i;
             }
